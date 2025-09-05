@@ -1,15 +1,5 @@
 import { pgTable, pgEnum } from "drizzle-orm/pg-core";
 
-export const users = pgTable("users", (t) => ({
-  id: t.serial("id").primaryKey(),
-  firstName: t.varchar("first_name", { length: 255 }).notNull(),
-  lastName: t.varchar("last_name", { length: 255 }).notNull(),
-  email: t.varchar("email", { length: 255 }).notNull().unique(),
-  password: t.varchar("password_hash", { length: 255 }).notNull(),
-  createdAt: t.timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
-  updatedAt: t.timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
-}));
-
 export const leadStatus = pgEnum("lead_status", [
   "Pending",
   "Contacted",

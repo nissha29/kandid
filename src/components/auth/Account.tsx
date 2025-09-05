@@ -1,9 +1,30 @@
 import { FcGoogle } from "react-icons/fc";
 import { Mail, X } from "lucide-react";
 import { useAuthDialogStore } from "@/store/store";
+import toast from "react-hot-toast";
+import { createAuthClient } from "better-auth/client";
 
 export function Account() {
     const { setIsAuthDialogOpen, setView } = useAuthDialogStore();
+    const authClient = createAuthClient();
+
+    const signInWithGoogle = async () => {
+        try {
+            const response = await authClient.signIn.social({
+                provider: 'google',
+            });
+            console.log('Google login response:', response);
+            if (response && typeof response === 'object' && 'url' in response && typeof response.url === 'string') {
+                window.location.href = response.url;
+            } else {
+                console.error('Google login error:', response);
+                toast.error('Google login error');
+            }
+        } catch (error) {
+            console.error('Google login error:', error);
+            toast.error('Google login error');
+        }
+    };
 
     return (
         <div className="bg-white relative rounded-lg px-4 py-10 shadow-md">
@@ -38,7 +59,7 @@ export function Account() {
                         You must log in or register to continue.
                     </p>
 
-                    <button className="mt-6 w-full flex items-center justify-center gap-3 border border-neutral-400 rounded-full py-2.5 hover:bg-neutral-50 transition hover:cursor-pointer">
+                    <button onClick={signInWithGoogle} className="mt-6 w-full flex items-center justify-center gap-3 border border-neutral-400 rounded-full py-2.5 hover:bg-neutral-50 transition hover:cursor-pointer">
                         <FcGoogle size={16} />
                         <span className="text-neutral-700 font-semibold text-sm">Continue with Google</span>
                     </button>

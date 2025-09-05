@@ -14,7 +14,7 @@ export default function Hero() {
     const { isAuthDialogOpen, setIsAuthDialogOpen, view } = useAuthDialogStore();
 
     return (
-        <div className="w-full flex flex-col justify-center items-center px-56 py-7">
+        <div className="w-full flex flex-col justify-center items-center px-4 md:px-24 lg:px-28 xl:px-56 py-7">
             <Navbar />
             <div className="h-[45rem] w-full relative flex flex-col justify-start items-center">
                 <div
@@ -31,15 +31,15 @@ export default function Hero() {
                             "radial-gradient(ellipse 70% 60% at 50% 100%, #000 60%, transparent 100%)",
                     }}
                 />
-                <div className="flex justify-center items-center w-96 gap-1.5 text-sm text-neutral-800 mt-14 shadow-lg shadow-accent-dark/30 border border-accent-dark px-5 py-2 rounded-full tracking-wider">
+                <div className="flex justify-center items-center w-64 sm:w-96 gap-1.5 sm:text-sm text-neutral-800 mt-14 shadow-lg shadow-accent-dark/30 border border-accent-dark px-5 py-2 rounded-full tracking-wider text-xs text-center">
                     <Shield className="w-3 h-3 text-accent-dark" />
                     100% Guaranteed - No LinkedIn Suspensions
                 </div>
-                <div className="text-6xl text-neutral-800 mt-14 font-semibold flex flex-col justify-center items-center gap-5">
+                <div className="text-center text-3xl sm:text-5xl lg:text-6xl text-neutral-800 mt-14 font-semibold flex flex-col justify-center items-center gap-3">
                     <div className="tracking-tight">Effortless LinkedIn Outreach</div>
-                    <div className="tracking-tighter">100% Safe and Scalable</div>
+                    <div className="tracking-tighter z-10">100% Safe and Scalable</div>
                 </div>
-                <div className="mt-10 flex flex-col justify-center items-center gap-2 text-neutral-600 z-10 text-lg tracking-wide font-thin">
+                <div className="text-center mt-10 flex flex-col justify-center items-center text-neutral-600 z-10 text-lg tracking-wide font-thin">
                     <div>Automate LinkedIn outreach securely, generate leads, and boost</div>
                     <div>meetings without any risk of getting banned</div>
                 </div>
