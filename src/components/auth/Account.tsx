@@ -2,11 +2,13 @@ import { FcGoogle } from "react-icons/fc";
 import { Mail, X } from "lucide-react";
 import { useAuthDialogStore } from "@/store/store";
 import toast from "react-hot-toast";
-import { createAuthClient } from "better-auth/client";
+import { createAuthClient } from "better-auth/react";
 
 export function Account() {
     const { setIsAuthDialogOpen, setView } = useAuthDialogStore();
-    const authClient = createAuthClient();
+    const authClient = createAuthClient({
+        baseURL: "http://localhost:3000"
+    });
 
     const signInWithGoogle = async () => {
         try {
@@ -14,11 +16,15 @@ export function Account() {
                 provider: 'google',
             });
             console.log('Google login response:', response);
-            if (response && typeof response === 'object' && 'url' in response && typeof response.url === 'string') {
-                window.location.href = response.url;
+            
+            if (response?.data?.url) {
+                window.location.href = response.data.url;
+            } else if (response?.error) {
+                console.error('Google login error:', response.error);
+                toast.error(response.error.message || 'Google login failed');
             } else {
-                console.error('Google login error:', response);
-                toast.error('Google login error');
+                console.error('Unexpected response:', response);
+                toast.error('Google login failed - unexpected response');
             }
         } catch (error) {
             console.error('Google login error:', error);
@@ -27,7 +33,7 @@ export function Account() {
     };
 
     return (
-        <div className="bg-white relative rounded-lg px-4 py-10 shadow-md">
+        <div className="bg-white relative rounded-lg px-4 py-10 shadow-md w-sm sm:w-md">
             <div
                 className="absolute inset-0 z-0 rounded-lg"
                 style={{
@@ -54,7 +60,7 @@ export function Account() {
             <div className="flex items-center justify-center rounded-lg">
                 <div className="w-[380px] rounded-xl relative">
 
-                    <h2 className="text-2xl font-semibold text-center">Continue with an account</h2>
+                    <h2 className="text-xl sm:text-2xl font-semibold text-center">Continue with an account</h2>
                     <p className="text-neutral-500 text-center mt-1">
                         You must log in or register to continue.
                     </p>

@@ -15,6 +15,13 @@
       "when": 1757067219313,
       "tag": "0001_easy_tusk",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1757135934371,
+      "tag": "0002_oval_avengers",
+      "breakpoints": true
     }
   ]
 }

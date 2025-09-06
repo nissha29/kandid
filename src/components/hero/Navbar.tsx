@@ -19,7 +19,7 @@ export default function Navbar() {
     ];
 
     return (
-        <>
+        <div className="w-full">
             <div className="w-full flex lg:justify-around justify-between items-center shadow-lg bg-white rounded-xl py-3 px-8 lg:px-0 relative z-20">
                 <Image src="https://linkbird.ai/images/linkbird-light-logo.svg" alt="logo" width={150} height={150} />
 
@@ -70,6 +70,6 @@ export default function Navbar() {
                     </div>
                 </div>
             )}
-        </>
+        </div>
     );
 }

@@ -4,3 +4,20 @@ export type AuthDialogStore = {
     setIsAuthDialogOpen: (open: boolean) => void;
     setView: (view: "account" | "register" | "login") => void;
 };
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+}
+
+export interface AuthStore {
+  user: User | null;
+  setUser: (user: User) => void;
+  clearUser: () => void;
+}
+
+export type SidebarStore = {
+    isSidebarOpen: boolean,
+    setIsSidebarOpen: (open: boolean) => void;
+};

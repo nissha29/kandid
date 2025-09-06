@@ -84,7 +84,7 @@ export default function Hero() {
                     </div>
                 </div>}
 
-                {isAuthDialogOpen && <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-white/20">
+                {isAuthDialogOpen && <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm bg-white/20 px-3 sm:px-10">
                     {view === "account" ? <Account /> : view === "register" ? <Register /> : <Login />}
                 </div>}
             </div>

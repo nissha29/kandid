@@ -27,7 +27,7 @@ export function Login() {
     try {
       setIsLoading(true);
 
-      const res = await axios.post("/api/login", {
+      const res = await axios.post("/api/auth/login", {
         email: formData.identifier,
         password: formData.password,
       });
@@ -49,7 +49,7 @@ export function Login() {
 
 
   return (
-    <div className="bg-white w-sm rounded-lg shadow-md px-8 py-12 border border-neutral-300">
+    <div className="bg-white w-sm rounded-lg shadow-md px-3 sm:px-8 py-12 border border-neutral-300">
       <button
         onClick={() => setView("account")}
         className="flex items-center gap-1 text-neutral-500 hover:text-neutral-700 font-semibold text-sm hover:cursor-pointer"

@@ -29,7 +29,7 @@ export function Register() {
         try {
             setIsLoading(true);
 
-            const res = await axios.post("/api/register", formData, {
+            const res = await axios.post("/api/auth/register", formData, {
                 headers: { "Content-Type": "application/json" },
             });
 
@@ -49,7 +49,7 @@ export function Register() {
     };
 
     return (
-        <div className="bg-white max-w-sm rounded-lg shadow-md px-8 py-14 border border-neutral-300">
+        <div className="bg-white max-w-sm rounded-lg shadow-md px-3 sm:px-8 py-14 border border-neutral-300">
             <button
                 onClick={() => setView("account")}
                 className="flex items-center gap-1 text-neutral-500 hover:text-neutral-700 font-semibold text-sm hover:cursor-pointer"
