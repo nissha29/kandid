@@ -1,6 +1,6 @@
 import { useAuthDialogStore } from "@/store/store";
 import { ArrowLeft, Loader } from "lucide-react";
-import Input from "../forms/Input";
+import Input from "./Input";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";

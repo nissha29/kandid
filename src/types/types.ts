@@ -21,3 +21,9 @@ export type SidebarStore = {
     isSidebarOpen: boolean,
     setIsSidebarOpen: (open: boolean) => void;
 };
+
+
+export type LeadStore = {
+  leads: any[],
+  setLeads: (leads: any[]) => void;
+}

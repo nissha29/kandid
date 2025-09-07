@@ -16,6 +16,7 @@ export const leads = pgTable("leads", (t) => ({
   campaignName: t.varchar("campaign_name", { length: 255 }),
   status: leadStatus("status").default("Pending").notNull(),
   lastContactDate: t.timestamp("last_contact_date", { withTimezone: true }),
+  imageUrl: t.varchar("image_url", { length: 512 }),
   createdAt: t.timestamp("created_at", { withTimezone: true }).defaultNow().notNull(),
   updatedAt: t.timestamp("updated_at", { withTimezone: true }).defaultNow().notNull(),
 }));

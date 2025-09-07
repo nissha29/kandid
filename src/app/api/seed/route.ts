@@ -29,6 +29,7 @@ export async function POST() {
         campaignName: `Campaign ${faker.number.int({ min: 1, max: 10 })}`,
         status: faker.helpers.arrayElement(["Pending", "Contacted", "Responded", "Converted"]) as | "Pending" | "Contacted" | "Responded" | "Converted",
         lastContactDate: faker.date.past(),
+        imageUrl: `https://i.pravatar.cc/150?img=${faker.number.int({ min: 1, max: 70 })}`,
       });
     }
 
