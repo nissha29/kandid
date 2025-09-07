@@ -22,8 +22,14 @@ export type SidebarStore = {
     setIsSidebarOpen: (open: boolean) => void;
 };
 
-
-export type LeadStore = {
-  leads: any[],
-  setLeads: (leads: any[]) => void;
+export type Lead = {
+  leadName: string,
+  company: string,
+  campaignName: string,
+  status: string,
+  imageUrl: string,
+  id: number,
+  contact: string,
+  email: string,
+  lastContactDate: string,
 }

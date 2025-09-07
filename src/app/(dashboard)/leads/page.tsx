@@ -14,7 +14,7 @@ export default function Leads() {
                 <TbLayoutColumns className="w-5 h-5 hover:cursor-pointer" onClick={() => setIsSidebarOpen(!isSidebarOpen)} />
                 <div>Leads</div>
             </div>
-            <div className="px-36">
+            <div className="">
                 <LeadsTable />
             </div>
         </div>

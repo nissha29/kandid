@@ -35,7 +35,7 @@ export function Login() {
       localStorage.setItem("authToken", res.data.token);
       toast.success('Logged in successfully')
       setIsAuthDialogOpen(false);
-      router.push('/dashboard');
+      router.push('/leads');
     } catch (err) {
       if (axios.isAxiosError(err)) {
         toast.error(err.response?.data?.error || "Something went wrong");
