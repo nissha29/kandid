@@ -1,48 +1,47 @@
 'use client';
 
-import { Lead } from "@/types/types";
 import axios from "axios";
 import Image from "next/image";
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useRef, useEffect, useState } from "react";
 import LeadDetailSideSheet from "./LeadDetailSideSheet";
 import { getStatusClass } from "@/lib/getStatusClass";
+import { useInfiniteQuery } from "@tanstack/react-query";
 
 export default function LeadsTable() {
-    const [leads, setLeads] = useState<Lead[]>([]);
-    const [loading, setLoading] = useState(false);
-    const [offset, setOffset] = useState(0);
-    const [hasMore, setHasMore] = useState(true);
+    const tableRef = useRef<HTMLDivElement>(null);
     const [leadId, setLeadId] = useState<number | null>(null);
     const [isSheetOpen, setIsSheetOpen] = useState(false);
 
-    const tableRef = useRef<HTMLDivElement>(null);
+    const {
+        data,
+        isLoading,
+        isError,
+        fetchNextPage,
+        hasNextPage,
+        isFetchingNextPage,
+    } = useInfiniteQuery({
+        queryKey: ['leads'],
+        queryFn: async ({ pageParam = 0 }) => {
+            const res = await axios.get(`/api/leads?limit=10&offset=${pageParam}`);
+            return res.data;
+        },
+        getNextPageParam: (lastPage, allPages) => {
+            if (lastPage.hasMore) {
+                return allPages.length * 10;
+            }
+            return undefined;
+        },
+        initialPageParam: 0,
+    });
 
-    const fetchLeads = useCallback(async () => {
-        if (loading || !hasMore) return;
-
-        setLoading(true);
-        try {
-            const res = await axios.get(`/api/leads?limit=10&offset=${offset}`);
-            setLeads(prev => [...prev, ...res.data.leads]);
-            setOffset(prev => prev + res.data.leads.length);
-            setHasMore(res.data.hasMore);
-        } catch (err) {
-            console.error(err);
-        } finally {
-            setLoading(false);
-        }
-    }, [loading, hasMore, offset]);
-
-    useEffect(() => {
-        fetchLeads();
-    }, []);
+    const leads = data?.pages.flatMap(page => page.leads) || [];
 
     useEffect(() => {
         const handleScroll = () => {
-            if (!tableRef.current) return;
+            if (!tableRef.current || isLoading || isFetchingNextPage || !hasNextPage) return;
             const { scrollTop, scrollHeight, clientHeight } = tableRef.current;
             if (scrollTop + clientHeight >= scrollHeight - 10) {
-                fetchLeads();
+                fetchNextPage();
             }
         };
 
@@ -52,7 +51,9 @@ export default function LeadsTable() {
         }
 
         return () => tableDiv?.removeEventListener("scroll", handleScroll);
-    }, [loading, hasMore, fetchLeads]);
+    }, [isLoading, isFetchingNextPage, hasNextPage, fetchNextPage]);
+
+    if (isError) return <div>Error loading leads.</div>;
 
     return (
         <div>
@@ -90,7 +91,7 @@ export default function LeadsTable() {
                                     </td>
                                 </tr>
                             ))}
-                            {loading && (
+                            {(isLoading || isFetchingNextPage) && (
                                 <>
                                     {Array.from({ length: 10 }).map((_, i) => (
                                         <tr key={`skeleton-${i}`} className="animate-pulse">

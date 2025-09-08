@@ -7,7 +7,7 @@ import { useAuthStore, useSidebarStore } from "@/store/store";
 import { useRouter } from "next/navigation";
 
 export default function Sidebar() {
-  const [activeItem, setActiveItem] = useState("Leads");
+  const [activeItem, setActiveItem] = useState("");
   const { user, clearUser } = useAuthStore();
   const router = useRouter();
   const { isSidebarOpen } = useSidebarStore();
