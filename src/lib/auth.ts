@@ -35,7 +35,9 @@ export const auth = betterAuth({
         google: {
             clientId: process.env.GOOGLE_CLIENT_ID as string,
             clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-            redirectURI: 'http://localhost:3000'
+            redirectURI: process.env.NODE_ENV === "production"
+                ? "https://kandid-ten.vercel.app"
+                : "http://localhost:3000",
         },
     },
 });
