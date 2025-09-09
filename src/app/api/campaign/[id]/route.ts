@@ -1,12 +1,11 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { db } from "@/drizzle";
 import { campaigns } from "@/drizzle/schema";
 import { eq } from "drizzle-orm";
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
     try {
-        const param = await (params);
-        const campaignId = Number(param.id);
+        const campaignId = Number(params.id);
 
         if (isNaN(campaignId)) {
             return NextResponse.json({ error: "Invalid campaign ID" }, { status: 400 });
