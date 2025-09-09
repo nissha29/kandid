@@ -4,7 +4,6 @@ import { user, session } from "@/drizzle/schema";
 import { eq } from "drizzle-orm";
 
 export async function GET(req: Request) {
-    console.log('User route called');
     const authHeader = req.headers.get("authorization");
 
     if (!authHeader) {
