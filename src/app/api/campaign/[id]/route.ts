@@ -3,9 +3,10 @@ import { db } from "@/drizzle";
 import { campaigns } from "@/drizzle/schema";
 import { eq } from "drizzle-orm";
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(req: NextRequest, context: { params: Promise<{ id: string }> }) {
     try {
-        const campaignId = Number(params.id);
+        const { id } = await context.params;
+        const campaignId = Number(id);
 
         if (isNaN(campaignId)) {
             return NextResponse.json({ error: "Invalid campaign ID" }, { status: 400 });
