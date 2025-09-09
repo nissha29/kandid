@@ -33,3 +33,14 @@ export type Lead = {
   email: string,
   lastContactDate: string,
 }
+
+export type CampaignStore = {
+  isOpen: boolean,
+  setIsOpen: (open: boolean) => void,
+
+  campaignName: string,
+  setCampaignName: (name: string) => void,
+
+  selectedCampaignId: number | null,
+  setSelectedCampaignId: (id: number) => void,
+}

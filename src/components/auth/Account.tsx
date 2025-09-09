@@ -3,8 +3,11 @@ import { Mail, X } from "lucide-react";
 import { useAuthDialogStore } from "@/store/store";
 import toast from "react-hot-toast";
 import { createAuthClient } from "better-auth/react";
+import { useRouter } from "next/navigation";
 
 export function Account() {
+    const router = useRouter();
+
     const { setIsAuthDialogOpen, setView } = useAuthDialogStore();
     const authClient = createAuthClient({
         baseURL: "http://localhost:3000"
@@ -16,7 +19,7 @@ export function Account() {
                 provider: 'google',
             });
             console.log('Google login response:', response);
-            
+
             if (response?.data?.url) {
                 window.location.href = response.data.url;
             } else if (response?.error) {
@@ -26,6 +29,12 @@ export function Account() {
                 console.error('Unexpected response:', response);
                 toast.error('Google login failed - unexpected response');
             }
+
+            if (response.data && 'user' in response.data && response.data.user) {
+                toast.success("Logged in successfully!");
+                router.push("/leads");
+            }
+
         } catch (error) {
             console.error('Google login error:', error);
             toast.error('Google login error');

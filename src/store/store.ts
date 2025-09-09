@@ -1,4 +1,4 @@
-import { AuthDialogStore, AuthStore, SidebarStore } from "@/types/types";
+import { AuthDialogStore, AuthStore, CampaignStore, SidebarStore } from "@/types/types";
 import { create } from "zustand";
 
 export const useAuthDialogStore = create<AuthDialogStore>((set) => ({
@@ -17,4 +17,15 @@ export const useAuthStore = create<AuthStore>((set) => ({
 export const useSidebarStore = create<SidebarStore>((set) => ({
   isSidebarOpen: true,
   setIsSidebarOpen: (open: boolean) => set({ isSidebarOpen: open }),
+}));
+
+export const useCampaignStore = create<CampaignStore>((set) => ({
+  isOpen: false,
+  setIsOpen: (open: boolean) => set({ isOpen: open }),
+
+  campaignName: '',
+  setCampaignName: (name: string) => set({ campaignName: name }),
+
+  selectedCampaignId: null,
+  setSelectedCampaignId: (id: number) => set({ selectedCampaignId: id }),
 }));
