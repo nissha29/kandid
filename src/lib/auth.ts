@@ -4,7 +4,7 @@ import { db } from "@/drizzle";
 
 export const auth = betterAuth({
     baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
-    trustedOrigins: ["http://localhost:3000"],
+    trustedOrigins: ["https://kandid-ten.vercel.app"],
     database: drizzleAdapter(db, {
         provider: "pg",
     }),
