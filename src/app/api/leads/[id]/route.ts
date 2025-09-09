@@ -3,10 +3,10 @@ import { db } from "@/drizzle";
 import { leads } from "@/drizzle/schema";
 import { eq } from "drizzle-orm";
 
-export async function GET(req: Request, { params }: { params: { id: number } }) {
+export async function GET(req: Request, { params }: { params: { id: string } }) {
   try {
     const param = await (params);
-    const leadId = param.id;
+    const leadId = Number(param.id);
     
     if (isNaN(leadId)) {
       return NextResponse.json({ error: "Invalid lead ID" }, { status: 400 });
